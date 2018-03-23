@@ -30,6 +30,16 @@ class Song
     return song
   end
 
+  def self.create_from_filename(filename)
+    song = self.new
+    file_data = filename.split(" - ")
+    song_data = file_data[1].scan(/[^\.]+/)
+    song.name = song_data[0]
+    song.artist_name = file_data[0]
+    @@all << song
+    return song
+  end
+
   def self.find_by_name(name)
     @@all.each do |song|
       return song if song.name == name
